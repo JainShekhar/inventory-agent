@@ -1,175 +1,176 @@
-# Awesome Supply Chain
+# Inventory Placement Skills
 
-A comprehensive collection of research papers, implementations, libraries, and resources for supply chain management, organized by industry verticals.
-
-132 AI Agent Skills Available!** This repository now includes a complete Claude Code plugin with supply chain skills for AI coding assistants. [See Skills Documentation →](./skills/)
+A focused collection of 16 AI agent skills for solving inbound inventory placement problems. These skills work as a plugin for Claude Code and other AI coding assistants.
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [AI Skills Plugin](#ai-skills-plugin)
-- [Industry Verticals](#industry-verticals)
-- [General Research](#general-research)
-- [Libraries & Tools](#libraries--tools)
-- [Implementations](#implementations)
-- [Contributing](#contributing)
+- [Skills Plugin](#skills-plugin)
+- [Solver Libraries](#solver-libraries)
+- [Example Case Study](#example-case-study)
+- [Usage](#usage)
 
 ## Overview
 
-This repository consolidates the latest research, papers, implementations, and development libraries related to supply chain use cases across different industry verticals. It serves as a curated resource for researchers, practitioners, and developers working on supply chain optimization, management, and analytics.
+This directory contains 16 domain-specific skills designed to help solve the three critical questions of inventory placement:
 
-## AI Skills Plugin
+1. **WHERE to send** - Which facilities should receive inventory?
+2. **HOW MUCH to place** - What are optimal stocking levels?
+3. **WHEN to replenish** - What timing and frequency for orders?
 
-This repository includes **132 comprehensive AI agent skills** that work as a plugin for Claude Code and other AI coding assistants. These skills give your AI assistant expert knowledge in:
+## Skills Plugin
 
-- **Supply Chain Planning** - Demand forecasting, S&OP, capacity planning
-- **Operations Research** - VRP, TSP, facility location, knapsack, cutting stock
-- **Inventory Management** - EOQ, safety stock, multi-echelon optimization
-- **Warehouse Operations** - Slotting, routing, wave planning, automation
-- **Transportation** - Route optimization, fleet management, last-mile delivery
-- **Manufacturing** - Production scheduling, lean, quality management
-- **Domain Expertise** - Retail, CPG, energy, healthcare, travel, manufacturing
+The 16 skills provide AI assistants with expert knowledge in:
+
+- **Network & Location** - Facility location, DC network design, hub location
+- **Inventory Optimization** - Multi-echelon, safety stock, reorder points
+- **Allocation** - Retail allocation, demand-supply matching
+- **Replenishment** - Lot sizing, replenishment strategy, inventory routing
+- **Supporting** - Demand forecasting
 
 ### Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/kishorkukreja/awesome-supply-chain.git
-
 # Install skills to Claude Code
-cd awesome-supply-chain
+cd Inventory-Placement
 cp -r skills/* ~/.claude/skills/
 ```
 
 **Full Skills Documentation:** [skills/README.md](./skills/README.md)
 
-**Plugin Configuration:** [.claude/README.md](./.claude/README.md)
+## Solver Libraries
 
-## Industry Verticals
+This project uses validated computational solvers:
 
-### [Consumer Packaged Goods (CPG)](./verticals/cpg/)
-Supply chain research and implementations specific to consumer packaged goods industry, including network optimization, demand planning, and distribution strategies.
+### **stockpyl** (Inventory Math)
+Located in `../stockpyl/`, provides validated algorithms for inventory theory:
 
-### [Retail](./verticals/retail/)
-Retail supply chain management research covering omnichannel fulfillment, inventory optimization, last-mile delivery, and consumer-centric approaches.
+```python
+from stockpyl.eoq import economic_order_quantity
+from stockpyl.wagner_whitin import wagner_whitin
+from stockpyl.newsvendor import newsvendor_normal
+from stockpyl.rq import r_q_loss_function_approximation
+from stockpyl.ss import s_s_power_approximation
+from stockpyl.ssm_serial import optimize_base_stock_levels
+from stockpyl.gsm_tree import optimize_committed_service_times
+from stockpyl.meio_general import meio_by_coordinate_descent
+from stockpyl.sim import simulation
+```
 
-### [Manufacturing](./verticals/manufacturing/)
-Manufacturing supply chain topics including smart manufacturing, Industry 4.0, production planning, and digital twins.
+### **PuLP** (Optimization)
+Mixed-Integer Programming for network and allocation decisions:
 
-### [Industrial](./verticals/industrial/)
-Industrial supply chain research covering heavy equipment, B2B procurement, industrial IoT, and smart factories.
+```python
+import pulp
+prob = pulp.LpProblem("FacilityLocation", pulp.LpMinimize)
+# Binary variables for facility open/close
+# Continuous variables for flow allocation
+# Solve with included CBC solver
+prob.solve(pulp.PULP_CBC_CMD(msg=0))
+```
 
-### [Energy](./verticals/energy/)
-Energy supply chain optimization including renewable energy, oil & gas logistics, energy storage systems, and sustainable energy networks.
+### **scikit-learn** (Clustering)
+Store/location clustering for allocation tiers:
 
-### [Transportation & Logistics](./verticals/transportation/)
-Transportation and logistics optimization covering route planning, fleet management, warehouse operations, and last-mile delivery.
+```python
+from sklearn.cluster import KMeans
+```
 
-### [Travel & Hospitality](./verticals/travel/)
-Tourism and hospitality supply chain management including hotel operations, tour operators, and service chain optimization.
+## Example Case Study
 
-### [Cross-Industry](./verticals/cross-industry/)
-Research and solutions applicable across multiple industries, including general supply chain principles and emerging technologies.
+The `example_retailer_x/` directory contains a complete worked example:
 
-## General Research
+- **Retailer_X.md** - 23-page analytical report
+- **solve.py** - Python implementation solving all three problems
 
-### [Core Topics](./general-research/)
+**Scenario:** Mid-size electronics retailer with 4 stores, 2 DCs, 2 SKUs, and a DC capacity constraint.
 
-- **Machine Learning & AI**: Deep learning, reinforcement learning, and predictive analytics for supply chain
-- **Optimization**: Mathematical optimization, linear programming, metaheuristics
-- **Digital Technologies**: Blockchain, IoT, Digital Twins, Cloud Computing
-- **Sustainability**: Green supply chain, circular economy, carbon footprint reduction
-- **Risk Management**: Supply chain resilience, disruption management, scenario planning
-- **Demand Forecasting**: Time series analysis, forecasting models, demand sensing
-- **Inventory Management**: Stock optimization, safety stock, multi-echelon inventory
-- **Network Design**: Facility location, distribution network optimization
+**Results:**
+- Optimal DC-to-store assignments
+- Inventory policies (reorder points and order quantities)
+- 12-week vendor order schedule
+- Total annual cost analysis: $635,107
 
-## Libraries & Tools
+## Usage
 
-### [Python Libraries](./libraries/)
+An AI agent working in this directory will:
+1. Match the user's problem to relevant skill(s)
+2. Use assessment questions to understand context
+3. Apply the preferred solver to compute answers
+4. Fall back to custom code for edge cases
 
-Popular Python libraries for supply chain analysis and optimization:
-- **supplychainpy**: Supply chain analysis, modeling and simulation
-- **PuLP**: Linear programming
-- **OR-Tools**: Google's optimization tools
-- **NetworkX**: Network analysis and optimization
-- **Prophet**: Time series forecasting
-- **TensorFlow/PyTorch**: Deep learning frameworks
+### Requirements
 
-### Data & Analytics Tools
-- **Tableau**: Supply chain visualization
-- **Power BI**: Business intelligence and analytics
-- **Apache Spark**: Big data processing
-- **Apache Kafka**: Real-time data streaming
+```bash
+pip install stockpyl pulp scikit-learn numpy scipy
+```
 
-## Implementations
+## Skills Overview
 
-### [GitHub Repositories](./implementations/)
+### Where to Send (Network/Location)
 
-Curated list of open-source implementations:
-- Supply chain optimization algorithms
-- Demand forecasting models
-- Inventory management systems
-- Route optimization solutions
-- Warehouse management systems
-- Supply chain simulation frameworks
+| Skill | Solves |
+|-------|--------|
+| `facility-location-problem` | Which facilities to open (UFLP, CFLP, p-median) |
+| `distribution-center-network` | Multi-echelon DC design (plants → DCs → customers) |
+| `network-design` | End-to-end network structure and flow strategy |
+| `hub-location-problem` | Hub-and-spoke consolidation networks |
 
-## Key Research Themes (2024-2025)
+### How Much to Place (Allocation/Stocking)
 
-### Emerging Technologies
-- **Generative AI**: ChatGPT and LLMs for supply chain planning
-- **Digital Twins**: Virtual replicas for simulation and optimization
-- **Autonomous Systems**: Self-driving vehicles, drones, robots
-- **5G & Edge Computing**: Real-time decision making at the edge
+| Skill | Solves |
+|-------|--------|
+| `multi-echelon-inventory` | Safety stock positioning across network tiers |
+| `inventory-optimization` | (r,Q) and (s,S) policies, reorder points |
+| `retail-allocation` | Push inventory to stores/FCs based on forecast |
+| `demand-supply-matching` | Allocate constrained supply to demand locations |
+| `newsvendor-problem` | Single-period stocking under demand uncertainty |
+| `economic-order-quantity` | Optimal order quantities (EOQ, EPQ, discounts) |
 
-### Sustainability Focus
-- Carbon footprint reduction and tracking
-- Circular economy and closed-loop supply chains
-- Sustainable sourcing and ethical procurement
-- Green logistics and eco-friendly transportation
+### When to Replenish (Timing)
 
-### Resilience & Risk
-- Supply chain resilience frameworks
-- Multi-sourcing and supplier diversification
-- Scenario planning and risk mitigation
-- Real-time visibility and control towers
+| Skill | Solves |
+|-------|--------|
+| `replenishment-strategy` | Policy selection and parameter optimization |
+| `retail-replenishment` | Store-level min/max and DC-to-store flows |
+| `dynamic-lot-sizing` | Multi-period order schedules (Wagner-Whitin) |
+| `lot-sizing-problems` | Heuristic and optimal lot-sizing methods |
+| `inventory-routing-problem` | Joint delivery routing + inventory decisions |
+
+### Supporting
+
+| Skill | Solves |
+|-------|--------|
+| `demand-forecasting` | Demand estimation (feeds all three decisions) |
 
 ## Contributing
 
-We welcome contributions! Please follow these guidelines:
+Contributions welcome! Ways to improve this project:
 
-1. **Adding Papers**: Include title, authors, publication venue, year, and DOI/link
-2. **Adding Implementations**: Provide repository link, description, and key features
-3. **Adding Libraries**: Include installation instructions, use cases, and examples
-4. **Adding/Improving Skills**: Contribute to the AI skills in the `skills/` directory
-5. **Quality Standards**: Ensure resources are from reputable sources and are recent (preferably 2020+)
+1. **New case studies** - Add examples from different industries
+2. **Enhanced skills** - Improve existing skill documentation
+3. **Additional solvers** - Integrate other optimization libraries
+4. **Visualization tools** - Add plotting and reporting capabilities
+5. **Integration guides** - Connect with ERP/WMS systems
 
 ### Contributing Skills
 
-The `skills/` directory contains 132 AI agent skills for supply chain problems. To contribute:
+Each skill follows this structure:
+1. YAML frontmatter with name and description
+2. Assessment questions
+3. Preferred solver with verified API calls
+4. Frameworks and methodologies
+5. Python code examples
 
-1. Follow the existing skill structure (YAML frontmatter + markdown content)
-2. Include working Python code examples
-3. Add relevant algorithms and frameworks
-4. Reference industry best practices
-5. See [skills/README.md](./skills/README.md) for detailed guidelines
-
-## Research Sources
-
-- Academic journals (Scopus, Web of Science, Google Scholar)
-- Conference proceedings (ACM, IEEE, INFORMS)
-- Industry reports (Gartner, McKinsey, Forrester)
-- Open-source repositories (GitHub, GitLab)
-- Preprint servers (arXiv, SSRN)
+See [skills/README.md](./skills/README.md) for detailed guidelines.
 
 ## License
 
-This repository is maintained for educational and research purposes. Please respect the licenses of individual papers, libraries, and implementations.
-
-## Maintainers
-
-This repository is actively maintained and updated with the latest research and developments in supply chain management.
+Educational and research use. Component licenses:
+- stockpyl: Check original repository
+- PuLP: BSD License
+- Skills and documentation: MIT License
 
 ---
 
-**Last Updated**: October 2025
+**Last Updated**: June 2026
