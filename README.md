@@ -16,27 +16,29 @@ Three core decisions for inventory inbound placement:
 
 ```
 inventory-agent/
-├── Inventory-Placement/
-│   ├── skills/                  # 16 domain skills (SKILL.md files)
-│   │   ├── facility-location-problem/
-│   │   ├── distribution-center-network/
-│   │   ├── network-design/
-│   │   ├── hub-location-problem/
-│   │   ├── multi-echelon-inventory/
-│   │   ├── inventory-optimization/
-│   │   ├── retail-allocation/
-│   │   ├── demand-supply-matching/
-│   │   ├── newsvendor-problem/
-│   │   ├── economic-order-quantity/
-│   │   ├── dynamic-lot-sizing/
-│   │   ├── lot-sizing-problems/
-│   │   ├── replenishment-strategy/
-│   │   ├── retail-replenishment/
-│   │   └── inventory-routing-problem/
-│   └── example_retailer_x/      # Complete case study
-│       ├── Retailer_X.md        # 23-page analytical report
-│       └── solve.py             # Working implementation
+├── skills/                      # 16 domain skills (SKILL.md files)
+│   ├── facility-location-problem/
+│   ├── distribution-center-network/
+│   ├── network-design/
+│   ├── hub-location-problem/
+│   ├── multi-echelon-inventory/
+│   ├── inventory-optimization/
+│   ├── retail-allocation/
+│   ├── demand-supply-matching/
+│   ├── newsvendor-problem/
+│   ├── economic-order-quantity/
+│   ├── dynamic-lot-sizing/
+│   ├── lot-sizing-problems/
+│   ├── replenishment-strategy/
+│   ├── retail-replenishment/
+│   ├── inventory-routing-problem/
+│   └── demand-forecasting/
+├── example_retailer_x/          # Complete case study
+│   ├── Retailer_X.md            # 23-page analytical report
+│   └── solve.py                 # Working implementation
 ├── requirements.txt             # Python dependencies
+├── LICENSE                      # MIT License
+├── SKILLS_README.md             # Skills documentation
 └── README.md                    # This file
 ```
 
