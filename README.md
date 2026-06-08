@@ -1,6 +1,23 @@
-# Master Supply Chain — Inbound Inventory Placement
+# Inventory Placement Agent
 
-A focused toolkit for solving **inbound inventory placement** problems using AI-guided skills and validated computational solvers.
+An AI-powered toolkit for solving **inbound inventory placement** problems using Claude SDK, specialized skills, and validated computational solvers.
+
+## 🚀 NEW: AI Agent
+
+Ask questions in natural language and get optimized solutions! The agent:
+- Understands your inventory placement questions
+- Finds relevant optimization skills
+- Writes and executes Python code (PuLP/stockpyl)
+- Explains results in business terms
+
+**Quick Start:**
+```bash
+export ANTHROPIC_API_KEY='your-key'
+pip install -r requirements.txt
+python agent.py
+```
+
+See [AGENT_README.md](AGENT_README.md) for full documentation.
 
 ## Problem Domain
 
@@ -16,28 +33,21 @@ Three core decisions for inventory inbound placement:
 
 ```
 inventory-agent/
+├── agent.py                     # 🤖 AI Agent - Ask questions in natural language
+├── tools.py                     # Agent tools (skill reading, code execution)
+├── example_questions.py         # Pre-built example questions to test agent
 ├── skills/                      # 16 domain skills (SKILL.md files)
 │   ├── facility-location-problem/
-│   ├── distribution-center-network/
-│   ├── network-design/
-│   ├── hub-location-problem/
-│   ├── multi-echelon-inventory/
 │   ├── inventory-optimization/
-│   ├── retail-allocation/
-│   ├── demand-supply-matching/
-│   ├── newsvendor-problem/
 │   ├── economic-order-quantity/
-│   ├── dynamic-lot-sizing/
-│   ├── lot-sizing-problems/
-│   ├── replenishment-strategy/
-│   ├── retail-replenishment/
-│   ├── inventory-routing-problem/
-│   └── demand-forecasting/
-├── example_retailer_x/          # Complete case study
+│   ├── newsvendor-problem/
+│   └── ... (12 more)
+├── example_retailer_x/          # Manual case study
 │   ├── Retailer_X.md            # 23-page analytical report
-│   └── solve.py                 # Working implementation
+│   └── solve.py                 # Direct Python implementation
 ├── requirements.txt             # Python dependencies
 ├── LICENSE                      # MIT License
+├── AGENT_README.md              # 🤖 Agent documentation
 ├── SKILLS_README.md             # Skills documentation
 └── README.md                    # This file
 ```

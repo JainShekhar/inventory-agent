@@ -1,5 +1,8 @@
 # Inventory Placement Agent - Python Dependencies
 
+# AI Agent (required for agent.py)
+anthropic>=0.18.0        # Claude SDK for AI agent
+
 # Optimization Libraries
 pulp>=2.7.0              # Linear/Mixed-Integer Programming
 stockpyl>=1.1.0          # Inventory optimization algorithms
