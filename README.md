@@ -152,3 +152,17 @@ pip install -r requirements.txt
 - NumPy/SciPy - Numerical computing
 - scikit-learn - Machine learning (optional, for clustering)
 - pandas - Data manipulation (optional)
+
+## Acknowledgments
+
+The 16 supply chain skills in this repository are derived from the [awesome-supply-chain](https://github.com/kishorkukreja/awesome-supply-chain) project by Kishor Kukreja, which provides a comprehensive collection of 132+ supply chain optimization skills. This repository focuses specifically on inventory placement problems.
+
+We also acknowledge:
+- **stockpyl** library by [Larry Snyder](https://github.com/LarrySnyder/stockpyl) for inventory optimization algorithms
+- The operations research and supply chain community for validated methodologies
+
+## License
+
+MIT License - Copyright (c) 2026 JainShekhar
+
+See [LICENSE](LICENSE) file for full details. This project incorporates work from awesome-supply-chain (MIT License) and uses stockpyl (MIT License).

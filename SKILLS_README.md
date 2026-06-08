@@ -168,12 +168,26 @@ Each skill follows this structure:
 
 See [skills/README.md](./skills/README.md) for detailed guidelines.
 
+## Acknowledgments
+
+This skills collection is derived from the [awesome-supply-chain](https://github.com/kishorkukreja/awesome-supply-chain) repository by Kishor Kukreja. The original repository contains 132 comprehensive supply chain skills covering a broader range of topics including:
+
+- Core supply chain functions (planning, forecasting, warehouse operations)
+- Domain-specific verticals (CPG, retail, manufacturing, energy, healthcare)
+- Operations research problems (routing, packing, scheduling, cutting stock)
+- Advanced optimization and AI/ML techniques
+
+This repository focuses specifically on the **16 inventory placement skills** that solve the core inbound placement questions (where/how much/when). We're grateful to Kishor Kukreja for creating and sharing this comprehensive knowledge base with the supply chain community.
+
+**Original Repository:** https://github.com/kishorkukreja/awesome-supply-chain
+
 ## License
 
 Educational and research use. Component licenses:
-- stockpyl: Check original repository
+- Skills framework: Derived from awesome-supply-chain (MIT License)
+- stockpyl: Check [original repository](https://github.com/LarrySnyder/stockpyl) (MIT License)
 - PuLP: BSD License
-- Skills and documentation: MIT License
+- This repository and modifications: MIT License (Copyright 2026 JainShekhar)
 
 ---
 
