@@ -15,26 +15,28 @@ Three core decisions for inventory inbound placement:
 ## Directory Structure
 
 ```
-master_supplychain/
+inventory-agent/
 ├── Inventory-Placement/
-│   └── skills/                  # 16 domain skills (SKILL.md files)
-│       ├── facility-location-problem/
-│       ├── distribution-center-network/
-│       ├── network-design/
-│       ├── hub-location-problem/
-│       ├── multi-echelon-inventory/
-│       ├── inventory-optimization/
-│       ├── retail-allocation/
-│       ├── demand-supply-matching/
-│       ├── newsvendor-problem/
-│       ├── economic-order-quantity/
-│       ├── dynamic-lot-sizing/
-│       ├── lot-sizing-problems/
-│       ├── replenishment-strategy/
-│       ├── retail-replenishment/
-│       ├── inventory-routing-problem/
-│       └── demand-forecasting/
-├── stockpyl/                    # Inventory math library (source)
+│   ├── skills/                  # 16 domain skills (SKILL.md files)
+│   │   ├── facility-location-problem/
+│   │   ├── distribution-center-network/
+│   │   ├── network-design/
+│   │   ├── hub-location-problem/
+│   │   ├── multi-echelon-inventory/
+│   │   ├── inventory-optimization/
+│   │   ├── retail-allocation/
+│   │   ├── demand-supply-matching/
+│   │   ├── newsvendor-problem/
+│   │   ├── economic-order-quantity/
+│   │   ├── dynamic-lot-sizing/
+│   │   ├── lot-sizing-problems/
+│   │   ├── replenishment-strategy/
+│   │   ├── retail-replenishment/
+│   │   └── inventory-routing-problem/
+│   └── example_retailer_x/      # Complete case study
+│       ├── Retailer_X.md        # 23-page analytical report
+│       └── solve.py             # Working implementation
+├── requirements.txt             # Python dependencies
 └── README.md                    # This file
 ```
 
@@ -129,10 +131,22 @@ A Claude agent working in this directory will:
 3. Apply the preferred solver to compute the answer
 4. Fall back to the skill's custom code for edge cases
 
-## Requirements
+## Installation
 
-```
-pip install stockpyl pulp scikit-learn
+```bash
+# Clone the repository
+git clone https://github.com/JainShekhar/inventory-agent.git
+cd inventory-agent
+
+# Install Python dependencies
+pip install -r requirements.txt
 ```
 
-scipy and numpy are dependencies of the above.
+### Requirements
+
+- Python 3.7+
+- stockpyl - Inventory optimization algorithms
+- PuLP - Linear/Mixed-Integer Programming
+- NumPy/SciPy - Numerical computing
+- scikit-learn - Machine learning (optional, for clustering)
+- pandas - Data manipulation (optional)

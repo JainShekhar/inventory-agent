@@ -40,10 +40,10 @@ cp -r skills/* ~/.claude/skills/
 
 ## Solver Libraries
 
-This project uses validated computational solvers:
+This project uses validated computational solvers (install via `pip`):
 
 ### **stockpyl** (Inventory Math)
-Located in `../stockpyl/`, provides validated algorithms for inventory theory:
+Provides validated algorithms for inventory theory:
 
 ```python
 from stockpyl.eoq import economic_order_quantity
@@ -99,9 +99,13 @@ An AI agent working in this directory will:
 3. Apply the preferred solver to compute answers
 4. Fall back to custom code for edge cases
 
-### Requirements
+### Installation
 
 ```bash
+# From the repository root
+pip install -r requirements.txt
+
+# Or install individually
 pip install stockpyl pulp scikit-learn numpy scipy
 ```
 
